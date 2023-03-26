@@ -81,13 +81,11 @@ public class BotService extends TelegramLongPollingBot {
 
     @Override
     public String getBotUsername() {
-        log.info("userName " + botName);
         return botName;
     }
 
     @Override
     public String getBotToken() {
-        log.info("token " + botToken);
         return botToken;
     }
 }
