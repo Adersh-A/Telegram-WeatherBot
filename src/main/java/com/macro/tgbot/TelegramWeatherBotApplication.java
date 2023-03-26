@@ -12,26 +12,8 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 @SpringBootApplication
 public class TelegramWeatherBotApplication {
 
-
 	public static void main(String[] args) {
 		SpringApplication.run(TelegramWeatherBotApplication.class, args);
 	}
-
-//	@Bean
-//	public BotService myBot() {
-//		BotService bot = new BotService();
-//		try {
-//			TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
-//			botsApi.registerBot(bot);
-//		} catch (TelegramApiException e) {
-//			e.printStackTrace();
-//		}
-//		return bot;
-//	}
-
-//	@Bean
-//	public BotService myBot() {
-//		return new BotService();
-//	}
 
 }
