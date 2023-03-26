@@ -52,11 +52,7 @@ public class BotService extends TelegramLongPollingBot {
                 SendMessage message = new SendMessage();
                 message.setChatId(update.getMessage().getChatId().toString());
                 message.setText("Welcome to weather bot \uD83C\uDF27. type the plcae to get weather details");
-                try {
-                    execute(message);
-                } catch (TelegramApiException e) {
-                    throw new RuntimeException(e);
-                }
+                sendMessageToChat(message);
             } else {
                 String place = update.getMessage().getText();
                 WeatherDetails weatherDetails = apiService.getWeatherDetails(place);
@@ -67,16 +63,26 @@ public class BotService extends TelegramLongPollingBot {
                             , weatherDetails.getCountry(), weatherDetails.getWeather(), weatherDetails.getAqi(), aqiDescription);
                     sendMessage.setChatId(update.getMessage().getChatId().toString());
                     sendMessage.setText(message);
-                    try {
-                        execute(sendMessage);
-                    } catch (TelegramApiException e) {
-                        throw new RuntimeException(e);
-                    }
+                    sendMessageToChat(sendMessage);
+                }else{
+                    SendMessage sendMessage = new SendMessage();
+                    String message = "sry couldn't get the weather details \ud83d\ude22, please check whether the place entered is a valid one!! ";
+                    sendMessage.setChatId(update.getMessage().getChatId().toString());
+                    sendMessage.setText(message);
+                    sendMessageToChat(sendMessage);
                 }
             }
 
         }
 
+    }
+
+    private void sendMessageToChat(SendMessage sendMessage) {
+        try {
+            execute(sendMessage);
+        } catch (TelegramApiException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
